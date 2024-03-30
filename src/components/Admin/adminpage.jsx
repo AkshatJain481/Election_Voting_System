@@ -1,6 +1,6 @@
 
 import { auth } from '../../firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -19,18 +19,21 @@ function Adminpage(IsAuth) {
       const [voterID, setVoterID] = useState('');
       const [searchResult, setSearchResult] = useState(null);
       const [error, setError] = useState(null);
-  
+      const [flag,setFlag] = useState(false)
       const handleSubmit = async (e) => {
           e.preventDefault();
           setError(null)
-            setSearchResult(null)
+          setSearchResult(null)
           try {
               // Make HTTP request to your backend
               const response = await axios.get(`/admin?aadharID=${aadharID}&voterID=${voterID}`);
-              setSearchResult(response.data);
+                setSearchResult(response.data);
+                setFlag(true)
+                
+            
           } catch (err) {
 
-              setError("VOTER NOT FOUND!!");
+              setError("LET THE DATABASE LOAD PLEASE WAIT!!");
           }
       };
   
@@ -84,19 +87,43 @@ function Adminpage(IsAuth) {
                     Search
                 </button>
             </form>
-
-            {searchResult && (
-                <div>
-                    <h3>Search Result:</h3>
-                    <p>Name: {searchResult.name}</p>
-                    <p>Date of Birth: {searchResult.dob}</p>
-                </div>
+            {searchResult ? (
+               <></>
+            ):(
+            <div>
+                {flag ? (<>No such voter with this ID found!!</>):(<></>)}
+            </div>
             )}
             {error && <p>Error: {error}</p>}
         </div>
-          </div>
-          </div>
+        
         </div>
+        {searchResult ? (<div id="detailShow" className="bg-white bg-opacity-30 backdrop-blur-md rounded-lg p-5 shadow-lg shadow-gray-800 w-80 mr-5 h-auto flex flex-col justify-center items-center">
+    {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyUO0lmYGGzGe9jOXgF8XzowltGRkjgNfjvA" className="w-20 h-20 rounded-full  mb-5"/> */}
+    <div className="flex justify-center items-center ">
+      <ol className="text-left">
+        <li className='text-center my-[14px]'><p>{searchResult.name}</p></li>
+        <li className='text-center my-[14px]'><p>{searchResult.dob}</p></li>
+        <li className='text-center my-[14px]'><p>{searchResult.aadharID}</p></li>
+        <li className='text-center my-[14px]'><p>{searchResult.voterID}</p></li>
+      </ol>
+    </div>
+    <Link to='/ui' className='w-full py-2 bg-blue-500 text-white text-center border-none rounded-lg cursor-pointer mb-2 mt-5 font-montserrat transition-colors duration-300 hover:bg-blue-700'>Caste Vote</Link>
+  </div>):(<><div id="detailShow" className="bg-white bg-opacity-30 backdrop-blur-md rounded-lg p-5 shadow-lg shadow-gray-800 w-80 mr-5 h-auto flex flex-col justify-center items-center">
+    {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyUO0lmYGGzGe9jOXgF8XzowltGRkjgNfjvA" className="w-20 h-20 rounded-full  mb-5"/> */}
+    <div className="flex justify-center items-center ">
+      <ol className="text-left">
+        <li className='text-center my-[14px]'><p>Voter Name</p></li>
+        <li className='text-center my-[14px]'><p>Voter Date of birth</p></li>
+        <li className='text-center my-[14px]'><p>AadharID number</p></li>
+        <li className='text-center my-[14px]'><p>VoterID number</p></li>
+      </ol>
+    </div>
+    <Link to='/ui' className='w-full py-2 bg-blue-500 text-white text-center border-none rounded-lg cursor-pointer mb-2 mt-5 font-montserrat transition-colors duration-300 hover:bg-blue-700'>Caste Vote</Link>
+  </div></>)}
+          </div>
+          </div>
+          
         </>
           )
     }

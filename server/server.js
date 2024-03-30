@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+
 app.use(express.json());
 
 // MongoDB Atlas connection URL
@@ -48,18 +47,7 @@ const Voter = mongoose.model('users', voterSchema);
 // Middleware to parse JSON
 app.use(express.json());
 
-// Routes
 
-// Create a new voter
-app.post('/admin', async (req, res) => {
-    try {
-        const newVoter = new Voter(req.body);
-        await newVoter.save();
-        res.status(201).json(newVoter);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
 
 // Get all voters
 // Get voter by Aadhar ID and Voter ID
@@ -67,10 +55,16 @@ app.get('/admin', async (req, res) => {
     const { aadharID, voterID } = req.query;
     try {
         const voter = await Voter.findOne({ aadharID, voterID });
-       
+        console.log(voter)
+        if (!voter) {
+            // If voter is not found, return a 404 response
+            console.log("not found")
+        }
+        // If voter is found, return the voter details
         res.json(voter);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        // Handle other errors (e.g., database errors) with a 500 response
+        res.status(500).json({ message: 'Server Error' });
     }
 });
 

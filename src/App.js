@@ -3,6 +3,7 @@ import AuthenticationForm from "./components/Auth/authentication";
 import { BrowserRouter ,Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import {auth} from './firebase';
+import UserInterface from "./components/Home/UserInterface";
 
 
 
@@ -25,6 +26,8 @@ function App() {
       <Routes>
         <Route path='/' element = {<AuthenticationForm/>}></Route>
         <Route path="/admin" element = {<Adminpage name={IsAuthenticated}/>}></Route>
+        <Route path="/ui" element = {<UserInterface />}></Route>
+
         
       </Routes>
     </BrowserRouter>

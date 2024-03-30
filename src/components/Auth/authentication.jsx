@@ -73,31 +73,37 @@ function AuthenticationForm() {
     }
   }, [errors, values.name, values.email, values.password, navigate]);
   return (
-<>  <div className='bg-[#000000] max-w-[400px] h-[400px] rounded-3xl mx-auto mt-[8%]'>
-          <form className="flex flex-col " onSubmit={handleSubmit}>
-            <div className='mx-auto mt-[25px]'>
-              <label className="font-montser5at text-[20px]  text-white font-bold mt-[15px] flex items-start mb-[15px]" htmlFor="email">Email</label>
-              <input className="font-montserrat placeholder:text-white bg-white bg-opacity-25 border-white focus:border-white
-    focus:outline-white focus:bg-opacity-35 text-white rounded-3xl  py-2 pl-6 pr-20 h-10 w-400  
-    " type='email' placeholder='Enter Email' onChange={handleInput} name='email' />
-              {/* {errors.email && <span>{errors.email}</span>} */}
-            </div>
-            <div className='mx-auto mt-[40px] mb-[30px]' >
-              <label className="font-montserrat text-xl text-white font-bold mt-4  flex items-start mb-4" htmlFor="password">password</label>
-              <input className=" border font-montserrat placeholder:text-white bg-white bg-opacity-25 border-white focus:border-white
-    focus:outline-white focus:bg-opacity-35  text-white rounded-3xl py-2 pl-6 pr-20 h-10 w-400   
-    " type='password' placeholder='Enter password' onChange={handleInput} name='password' />
-              {/* {errors.password && <span>{errors.password}</span>} */}
-            </div>  
-            <div className="flex justify-center items-center">
-            <button className="font-montserrat text-xl text-white mx-auto
- rounded-3xl font-bold bg-orange border-none w-52 h-12 mb-2.5 transition ease-in-out duration-300 hover:bg-new hover:scale-110  active:bg-new1 mt-5 justify-center items-center
- " type='submit' disabled={SubmitButtonDisabled} >Sign in (Admin)</button>
- </div> 
-           
-          </form>
-        
-          </div>
+
+<>  
+<div className="h-screen flex flex-col bg-cover bg-[url('https://ideogram.ai/api/images/direct/TyW8v1mDS2OcdmBC3kwbSw.jpg')]">
+  <nav className="bg-orange-500 p-2 w-full shadow-orange-800 shadow-md fixed top-0 left-0 right-0 z-10">
+    <div className="container mx-auto flex justify-between items-center">
+      <img src="https://uidai.gov.in/images/logo/uidai_english_logo.svg" alt="Logo" className="h-10"/>
+      <div className="flex items-center space-x-4">
+        <img src="https://www.glidersindia.in/images/front/amrit.png" className="w-40 h-16"/>
+      </div>
+    </div>
+  </nav>
+  <div className="flex-grow flex justify-center items-center">
+    <form onSubmit={handleSubmit}>
+    <div className="bg-white pr-10 pl-10 pt-5 pb-5 rounded-md  z-10 bg-opacity-30 backdrop-blur-md shadow-lg shadow-gray-700">
+      <div className="flex justify-center mb-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/800px-Emblem_of_India.svg.png" className="w-24 h-32"/>
+      </div>
+      
+      <div className="mb-4">
+        <input type='email' placeholder='Enter Email' onChange={handleInput} name='email'  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+      <div className="mb-6">
+        <input type='password' placeholder='Enter password' onChange={handleInput} name='password'  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+      <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" type='submit' disabled={SubmitButtonDisabled} >Login</button>
+      <p className="text-black text-sm mt-4 ml-5">Terms & Conditions apply</p>
+   
+    </div>
+  </form>
+  </div>
+</div>
     </>
     )
 }
