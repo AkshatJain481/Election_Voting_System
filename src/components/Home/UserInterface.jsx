@@ -2,7 +2,7 @@ import React from 'react'
 
 function UserInterface() {
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-[url('https://ideogram.ai/api/images/direct/Q8INQDVtR_Wfz17L-1zlPg.png')] bg-cover bg-center bg-no-repeat flex justify-between items-center">
+    <div className="fixed top-0 left-0 w-full h-full bg-[url('https://ideogram.ai/api/images/direct/tFP3YJtiRW6GcbuJNBtd0Q.jpg')] bg-cover bg-center bg-no-repeat flex justify-between items-center">
     <div class="flex">
     <div class="grid grid-cols-1">
       <button class="flex items-center border-none w-[200px] h-[80px] font-bold rounded-[30px] text-xl ml-[350px] mb-[100px] party-logos hover:bg-[#00a7b3] hover:text-[#ffffff] bg-[#ffffff]">
