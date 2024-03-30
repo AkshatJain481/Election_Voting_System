@@ -1,6 +1,5 @@
 import Adminpage from "./components/Admin/adminpage";
 import AuthenticationForm from "./components/Auth/authentication";
-import UserInterface from "./components/Home/UserInterface";
 import { BrowserRouter ,Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import {auth} from './firebase';
