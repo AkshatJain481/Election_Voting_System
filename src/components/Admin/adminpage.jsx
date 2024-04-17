@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function Adminpage(IsAuth) {
+  
     const navigate = useNavigate();
     const handleSignOut = () => {
         auth.signOut()
@@ -21,21 +22,26 @@ function Adminpage(IsAuth) {
       const [error, setError] = useState(null);
       const [flag,setFlag] = useState(false)
       const handleSubmit = async (e) => {
-          e.preventDefault();
-          setError(null)
-          setSearchResult(null)
-          try {
-              // Make HTTP request to your backend
-              const response = await axios.get(`/admin?aadharID=${aadharID}&voterID=${voterID}`);
-                setSearchResult(response.data);
-                setFlag(true)
-                
-            
-          } catch (err) {
-
-              setError("LET THE DATABASE LOAD PLEASE WAIT!!");
-          }
-      };
+        e.preventDefault();
+        setError(null);
+        setSearchResult(null);
+        try {
+            // Validate aadharID and voterID before making the request
+            if (!aadharID || !voterID) {
+                setError("Please provide both Aadhar ID and Voter ID");
+                return;
+            }
+    
+            // Make HTTP request to your backend
+            const response = await axios.post(`/admin`, {aadharID , voterID});
+            setSearchResult(response.data);
+            setFlag(true);
+        } catch (err) {
+            console.log(err);
+            setError("An error occurred while fetching data. Please try again.");
+        }
+    };
+    
   
       
     if(IsAuth.name){
